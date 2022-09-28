@@ -1,4 +1,5 @@
 import 'package:fill_in_it/Constants/Constants.dart';
+import 'package:fill_in_it/Pages/ConfirmationPage.dart';
 import 'package:flutter/material.dart';
 
 
@@ -16,21 +17,50 @@ class _HomeState extends State<Home> {
       state: _stepState(0),
       title: Text('Address',style: TextStyle(color: textcolor, fontSize: 20, fontWeight: FontWeight.w500),),
       content: Container(
-            child: Text('This is 1st step'),),
+            child: Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Address',
+                    border: InputBorder.none,
+                     labelStyle: TextStyle(fontSize: 20)
+                  ),
+                ),
+              ],
+            )),
   ),
   Step(
     isActive: _currentStep==1,
     state: _stepState(1),
-      title: Text('basic',style: TextStyle(color: textcolor, fontSize: 20, fontWeight: FontWeight.w500),),
+      title: Text('Basic Details',style: TextStyle(color: textcolor, fontSize: 20, fontWeight: FontWeight.w500),),
     content: Container(
-          child: Text('This is 2nd step'),),
+          child: Column(
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  border: InputBorder.none,
+                  labelStyle: TextStyle(fontSize: 20)
+                ),
+              ),
+              TextField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'Phone No.',
+                  border: InputBorder.none,
+                    labelStyle: TextStyle(fontSize: 20)
+
+                ),
+              ),
+
+            ],
+          ),),
   ),
     Step(
       isActive: _currentStep==2,
       state: _stepState(2),
       title: Text('Checkout',style: TextStyle(color: textcolor, fontSize: 20, fontWeight: FontWeight.w500),),
-      content: Container(
-        child: Text('This is 3rd step'),),
+      content: Container(),
     ),
   ];
 
@@ -47,10 +77,9 @@ class _HomeState extends State<Home> {
       setState(() {
         _currentStep++;
       });
+
     }else{
-      setState(() {
-        _currentStep=0;
-      });
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Confirm()));
     }
   }
 
@@ -85,7 +114,8 @@ class _HomeState extends State<Home> {
             ) ,),
 
       if(_currentStep != 0)
-         TextButton(onPressed: controlDetails.onStepCancel,child: Text('Back', style: TextStyle(color: textcolor,fontSize: 18,fontWeight: FontWeight.w500),),),
+         TextButton(onPressed: controlDetails.onStepCancel,child:
+         Text('Back', style: TextStyle(color: textcolor,fontSize: 18,fontWeight: FontWeight.w500),),),
 
   ],
   ),);
